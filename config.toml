@@ -1,4 +1,4 @@
-baseURL = "https://ketomo.netlify.app/"
+baseURL = "https://hailazy.com/"
 # [en, zh-cn, fr, ...] determines default content language
 defaultContentLanguage = "vi"
 # theme
@@ -69,7 +69,7 @@ enableEmoji = true
   # site keywords
   keywords = ["Thanh Hai", "Blog", "Kẻ tò mò"]
   # public git repo url only then enableGitInfo is true
-  gitRepo = "https://github.com/haimap/hai-blog"
+  gitRepo = "https://github.com/haimap/HaiLazy"
   # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
   # site default theme ("light", "dark", "auto")
