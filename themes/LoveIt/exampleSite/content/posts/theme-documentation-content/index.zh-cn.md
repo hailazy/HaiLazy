@@ -7,11 +7,13 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "了解如何在 LoveIt 主题中快速, 直观地创建和组织内容."
-images: ["/images/theme-documentation-content/featured-image.jpg"]
+images: []
+resources:
+- name: "featured-image"
+  src: "featured-image.jpg"
 
 tags: ["content", "Markdown"]
 categories: ["documentation"]
-featuredImage: "/images/theme-documentation-content/featured-image.jpg"
 
 lightgallery: true
 
@@ -25,13 +27,34 @@ math:
 
 <!--more-->
 
-## 1 内容组织
+## 1 内容组织 {#contents-organization}
 
 以下是一些方便你清晰管理和生成文章的目录结构建议:
 
 * 保持博客文章存放在 `content/posts` 目录, 例如: `content/posts/我的第一篇文章.md`
 * 保持简单的静态页面存放在 `content` 目录, 例如: `content/about.md`
-* 保持图片之类的媒体资源存放在 `static` 目录, 例如: `static/images/screenshot.png`
+* 本地资源组织
+
+{{< admonition note "本地资源引用" >}}
+{{< version 0.2.10 >}}
+
+有三种方法来引用**图片**和**音乐**等本地资源:
+
+1. 使用[页面包](https://gohugo.io/content-management/page-bundles/)中的[页面资源](https://gohugo.io/content-management/page-resources/).
+   你可以使用适用于 `Resources.GetMatch` 的值或者直接使用相对于当前页面目录的文件路径来引用页面资源.
+2. 将本地资源放在 **assets** 目录中, 默认路径是 `/assets`.
+   引用资源的文件路径是相对于 assets 目录的.
+3. 将本地资源放在 **static** 目录中, 默认路径是 `/static`.
+   引用资源的文件路径是相对于 static 目录的.
+
+引用的**优先级**符合以上的顺序.
+
+在这个主题中的很多地方可以使用上面的本地资源引用,
+例如 **链接**, **图片**, `image` shortcode, `music` shortcode 和**前置参数**中的部分参数.
+
+页面资源或者 **assets** 目录中的[图片处理](https://gohugo.io/content-management/image-processing/)会在未来的版本中得到支持.
+非常酷的功能! :(far fa-grin-squint fa-fw):
+{{< /admonition >}}
 
 ## 2 前置参数 {#front-matter}
 
@@ -59,6 +82,7 @@ images: []
 
 tags: []
 categories: []
+
 featuredImage: ""
 featuredImagePreview: ""
 
@@ -77,12 +101,11 @@ toc:
   auto: true
 code:
   copy: true
-  # ...
+  maxShownLines: 50
 math:
-  enable: true
+  enable: false
   # ...
 mapbox:
-  accessToken: ""
   # ...
 share:
   enable: true
@@ -101,6 +124,9 @@ library:
     # 位于 "assets/"
     # 或者
     # someJS = "https://cdn.example.com/some.js"
+seo:
+  images: []
+  # ...
 ---
 ```
 
@@ -117,6 +143,7 @@ library:
 
 * **tags**: 文章的标签.
 * **categories**: 文章所属的类别.
+
 * **featuredImage**: 文章的特色图片.
 * **featuredImagePreview**: 用在主页预览的文章特色图片.
 
@@ -130,19 +157,37 @@ library:
 * **linkToMarkdown**: 如果设为 `true`, 内容的页脚将显示指向原始 Markdown 文件的链接.
 * **rssFullText**: {{< version 0.2.4 >}} 如果设为 `true`, 在 RSS 中将会显示全文内容.
 
-* **toc**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.toc` 部分相同.
+* **toc**: {{< version 0.2.9 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.toc` 部分相同.
 * **code**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.code` 部分相同.
 * **math**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.math` 部分相同.
 * **mapbox**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.mapbox` 部分相同.
 * **share**: 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.share` 部分相同.
 * **comment**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.comment` 部分相同.
 * **library**: {{< version 0.2.7 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.library` 部分相同.
+* **seo**: {{< version 0.2.10 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.seo` 部分相同.
+
+{{< admonition tip >}}
+{{< version 0.2.10 >}}
+
+**featuredImage** 和 **featuredImagePreview** 支持[本地资源引用](#contents-organization)的完整用法.
+
+如果带有在前置参数中设置了 `name: featured-image` 或 `name: featured-image-preview` 属性的页面资源,
+没有必要在设置 `featuredImage` 或 `featuredImagePreview`:
+
+```yaml
+resources:
+- name: featured-image
+  src: featured-image.jpg
+- name: featured-image-preview
+  src: featured-image-preview.jpg
+```
+{{< /admonition >}}
 
 ## 3 内容摘要
 
 **LoveIt** 主题使用内容摘要在主页中显示大致文章信息。Hugo 支持生成文章的摘要.
 
-![文章摘要预览](/images/theme-documentation-content/summary.zh-cn.png "文章摘要预览")
+![文章摘要预览](summary.zh-cn.png "文章摘要预览")
 
 ### 自动摘要拆分
 
@@ -199,60 +244,176 @@ library:
 
 ### 数学公式
 
-**LoveIt** 基于 [$ \KaTeX $](https://katex.org/) 提供数学公式的支持.
+{{< version 0.2.11 changed >}}
+
+**LoveIt** 基于 [$\KaTeX$](https://katex.org/) 提供数学公式的支持.
 
 在你的 [网站配置](../theme-documentation-basics#site-configuration) 中的 `[params.math]` 下面设置属性 `enable = true`,
 并在文章的前置参数中设置属性 `math: true`来启用数学公式的自动渲染.
+**$\KaTeX$** 根据 **特定的分隔符** 来自动渲染公式.
 
 {{< admonition tip >}}
-有一份 [$ \KaTeX $ 中支持的 $ \TeX $ 函数](https://katex.org/docs/supported.html) 清单.
+有一份 [$\KaTeX$ 中支持的 $\TeX$ 函数](https://katex.org/docs/supported.html) 清单.
 {{< /admonition >}}
 
-#### 公式块
+{{< admonition >}}
+由于 Hugo 在渲染 Markdown 文档时会根据 `_`/`*`/`>>` 之类的语法生成 HTML 文档,
+并且有些转义字符形式的文本内容 (如 `\(`/`\)`/`\[`/`\]`/`\\`) 会自动进行转义处理,
+因此需要对这些地方进行额外的转义字符表达来实现自动渲染:
 
-默认的公式块分割符是 `$$`/`$$` 和 `\\[`/`\\]`:
+* `_` -> `\_`
+* `*` -> `\*`
+* `>>` -> `\>>`
+* `\(` -> `\\(`
+* `\)` -> `\\)`
+* `\[` -> `\\[`
+* `\]` -> `\\]`
+* `\\` -> `\\\\`
+
+**LoveIt** 主题支持 [`raw` shortcode](../theme-documentation-extended-shortcodes#12-raw) 以避免这些转义字符,
+它可以帮助您编写原始数学公式内容.
+
+一个 `raw` 示例:
 
 ```markdown
-$$ c = \pm\sqrt{a^2 + b^2} $$
+行内公式: {{</* raw */>}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){{</* /raw */>}}
 
-\\[ f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\]
+公式块:
+
+{{</* raw */>}}
+\[ a=b+c \\ d+e=f \]
+{{</* /raw */>}}
 ```
 
 呈现的输出效果如下:
 
-$$ c = \pm\sqrt{a^2 + b^2} $$
+行内公式: {{< raw >}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){{< /raw >}}
 
-\\[ f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\]
+公式块:
+
+{{< raw>}}
+\[ a=b+c \\ d+e=f \]
+{{< /raw >}}
+{{< /admonition >}}
 
 #### 行内公式
 
-默认的行内公式分割符是  `$`/`$` 和 `\\(`/`\\)`:
+默认的行内公式分割符有:
 
-```markdown
-$ c = \pm\sqrt{a^2 + b^2} $ 和 \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\)
+* `$ ... $`
+* `\( ... \)` (转义的: `\\( ... \\)`)
+
+例如:
+
+```tex
+$c = \pm\sqrt{a^2 + b^2}$ 和 \\(f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi\\)
 ```
 
 呈现的输出效果如下:
 
-$ c = \pm\sqrt{a^2 + b^2} $ 和 \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\)
+$c = \pm\sqrt{a^2 + b^2}$ 和 \\(f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi\\)
+
+#### 公式块
+
+默认的公式块分割符有:
+
+* `$$ ... $$`
+* `\[ ... \]` (转义的: `\\[ ... \\]`)
+* `\begin{equation} ... \end{equation}` (不编号的: `\begin{equation*} ... \end{equation*}`)
+* `\begin{align} ... \end{align}` (不编号的: `\begin{align*} ... \end{align*}`)
+* `\begin{alignat} ... \end{alignat}` (不编号的: `\begin{alignat*} ... \end{alignat*}`)
+* `\begin{gather} ... \end{gather}` (不编号的: `\begin{gather*} ... \end{gather*}`)
+* `\begin{CD} ... \end{CD}`
+
+例如:
+
+```tex
+$$ c = \pm\sqrt{a^2 + b^2} $$
+
+\\[ f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\]
+
+\begin{equation*}
+  \rho \frac{\mathrm{D} \mathbf{v}}{\mathrm{D} t}=\nabla \cdot \mathbb{P}+\rho \mathbf{f}
+\end{equation*}
+
+\begin{equation}
+  \mathbf{E}=\sum_{i} \mathbf{E}\_{i}=\mathbf{E}\_{1}+\mathbf{E}\_{2}+\mathbf{E}_{3}+\cdots
+\end{equation}
+
+\begin{align}
+  a&=b+c \\\\
+  d+e&=f
+\end{align}
+
+\begin{alignat}{2}
+   10&x+&3&y = 2 \\\\
+   3&x+&13&y = 4
+\end{alignat}
+
+\begin{gather}
+   a=b \\\\
+   e=b+c
+\end{gather}
+
+\begin{CD}
+   A @>a\>> B \\\\
+@VbVV @AAcA \\\\
+   C @= D
+\end{CD}
+```
+
+呈现的输出效果如下:
+
+$$ c = \pm\sqrt{a^2 + b^2} $$
+
+\\[ f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\]
+
+\begin{equation*}
+  \rho \frac{\mathrm{D} \mathbf{v}}{\mathrm{D} t}=\nabla \cdot \mathbb{P}+\rho \mathbf{f}
+\end{equation*}
+
+\begin{equation}
+  \mathbf{E}=\sum_{i} \mathbf{E}\_{i}=\mathbf{E}\_{1}+\mathbf{E}\_{2}+\mathbf{E}_{3}+\cdots
+\end{equation}
+
+\begin{align}
+  a&=b+c \\\\
+  d+e&=f
+\end{align}
+
+\begin{alignat}{2}
+   10&x+&3&y = 2 \\\\
+   3&x+&13&y = 4
+\end{alignat}
+
+\begin{gather}
+   a=b \\\\
+   e=b+c
+\end{gather}
+
+\begin{CD}
+   A @>a\>> B \\\\
+@VbVV @AAcA \\\\
+   C @= D
+\end{CD}
 
 {{< admonition tip >}}
-你可以在 [网站配置](../theme-documentation-basics#site-configuration) 中自定义公式块和行内公式的分割符.
+你可以在 [网站配置](../theme-documentation-basics#site-configuration) 中自定义行内公式和公式块的分割符.
 {{< /admonition >}}
 
 #### Copy-tex
 
-**[Copy-tex](https://github.com/Khan/KaTeX/tree/master/contrib/copy-tex)** 是一个 **$ \KaTeX $** 的插件.
+**[Copy-tex](https://github.com/Khan/KaTeX/tree/master/contrib/copy-tex)** 是一个 **$\KaTeX$** 的插件.
 
-通过这个扩展, 在选择并复制 $ \KaTeX $ 渲染的公式时, 会将其 $ \LaTeX $ 源代码复制到剪贴板.
+通过这个扩展, 在选择并复制 $\KaTeX$ 渲染的公式时, 会将其 $\LaTeX$ 源代码复制到剪贴板.
 
 在你的 [网站配置](../theme-documentation-basics#site-configuration) 中的 `[params.math]` 下面设置属性 `copyTex = true` 来启用 Copy-tex.
 
-选择并复制上一节中渲染的公式, 可以发现复制的内容为 LaTeX 源代码.
+选择并复制上一节中渲染的公式, 可以发现复制的内容为 $\LaTeX$ 源代码.
 
 #### mhchem
 
-**[mhchem](https://github.com/Khan/KaTeX/tree/master/contrib/mhchem)** 是一个 **$ \KaTeX $** 的插件.
+**[mhchem](https://github.com/Khan/KaTeX/tree/master/contrib/mhchem)** 是一个 **$\KaTeX$** 的插件.
 
 通过这个扩展, 你可以在文章中轻松编写漂亮的化学方程式.
 

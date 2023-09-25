@@ -1,33 +1,15 @@
-# Logs
-logs
-*.log
+### Hugo template
+# Generated files by hugo
+/public/
+/resources/_gen/
+/assets/jsconfig.json
+hugo_stats.json
 
-# Runtime data
-pids
-*.pid
-*.seed
+# Executable may be added to repository
+hugo.exe
+hugo.darwin
+hugo.linux
 
-# Test output
-coverage
-.nyc_output
+# Temporary lock file while building
+/.hugo_build.lock
 
-# API Doc output
-apidoc/output
-
-custom_module/simple-parse-smtp-adapter/node_modules
-
-# Dependency directory
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
-node_modules
-
-# Emacs
-*~
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
-.idea
-
-public
-.hugo_build.lock

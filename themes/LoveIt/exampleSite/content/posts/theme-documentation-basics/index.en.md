@@ -7,11 +7,13 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Discover what the Hugo - LoveIt theme is all about and the core-concepts behind it."
-images: ["/images/theme-documentation-basics/featured-image.jpg"]
+images: []
+resources:
+- name: "featured-image"
+  src: "featured-image.jpg"
 
 tags: ["installation", "configuration"]
 categories: ["documentation"]
-featuredImage: "/images/theme-documentation-basics/featured-image.jpg"
 
 lightgallery: true
 
@@ -75,21 +77,28 @@ The following is a basic configuration for the LoveIt theme:
 
 ```toml
 baseURL = "http://example.org/"
-# [en, zh-cn, fr, ...] determines default content language
-defaultContentLanguage = "en"
-# language code
-languageCode = "en"
-title = "My New Hugo Site"
 
 # Change the default theme to be use when building the site with Hugo
 theme = "LoveIt"
 
-[params]
-  # LoveIt theme version
-  version = "0.2.X"
+# website title
+title = "My New Hugo Site"
 
+# language code ["en", "zh-CN", "fr", "pl", ...]
+languageCode = "en"
+# language name ["English", "简体中文", "Français", "Polski", ...]
+languageName = "English"
+
+# Author config
+[author]
+  name = "xxxx"
+  email = ""
+  link = ""
+
+# Menu config
 [menu]
   [[menu.main]]
+    weight = 1
     identifier = "posts"
     # you can add extra information before the name (HTML format is supported), such as icons
     pre = ""
@@ -99,23 +108,22 @@ theme = "LoveIt"
     url = "/posts/"
     # title will be shown when you hover on this menu link
     title = ""
-    weight = 1
   [[menu.main]]
+    weight = 2
     identifier = "tags"
     pre = ""
     post = ""
     name = "Tags"
     url = "/tags/"
     title = ""
-    weight = 2
   [[menu.main]]
+    weight = 3
     identifier = "categories"
     pre = ""
     post = ""
     name = "Categories"
     url = "/categories/"
     title = ""
-    weight = 3
 
 # Markup related configuration in Hugo
 [markup]
@@ -153,7 +161,7 @@ hugo serve
 
 Go to `http://localhost:1313`.
 
-![Basic configuration preview](/images/theme-documentation-basics/basic-configuration-preview.png "Basic configuration preview")
+![Basic configuration preview](basic-configuration-preview.png "Basic configuration preview")
 
 {{< admonition tip >}}
 When you run `hugo serve`, when the contents of the files change, the page automatically refreshes with the changes.
@@ -192,67 +200,96 @@ In addition to [Hugo global configuration](https://gohugo.io/overview/configurat
 Please open the code block below to view the complete sample configuration :(far fa-hand-point-down fa-fw)::
 
 ```toml
+baseURL = "http://example.org/"
+
+# Change the default theme to be use when building the site with Hugo
+theme = "LoveIt"
+
+# website title
+title = "My New Hugo Site"
+
+# language code ["en", "zh-CN", "fr", "pl", ...]
+languageCode = "en"
+# language name ["English", "简体中文", "Français", "Polski", ...]
+languageName = "English"
+# whether to include Chinese/Japanese/Korean
+hasCJKLanguage = false
+
+# default amount of posts in each pages
+paginate = 12
+# google analytics code [UA-XXXXXXXX-X]
+googleAnalytics = ""
+# copyright description used only for seo schema
+copyright = ""
+
+# whether to use robots.txt
+enableRobotsTXT = true
+# whether to use git commit log
+enableGitInfo = true
+# whether to use emoji code
+enableEmoji = true
+
+# ignore some build errors
+ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
+
+# Author config
+[author]
+  name = "xxxx"
+  email = ""
+  link = ""
+
+# Menu config
+[menu]
+  [[menu.main]]
+    weight = 1
+    identifier = "posts"
+    # you can add extra information before the name (HTML format is supported), such as icons
+    pre = ""
+    # you can add extra information after the name (HTML format is supported), such as icons
+    post = ""
+    name = "Posts"
+    url = "/posts/"
+    # title will be shown when you hover on this menu link
+    title = ""
+  [[menu.main]]
+    weight = 2
+    identifier = "tags"
+    pre = ""
+    post = ""
+    name = "Tags"
+    url = "/tags/"
+    title = ""
+  [[menu.main]]
+    weight = 3
+    identifier = "categories"
+    pre = ""
+    post = ""
+    name = "Categories"
+    url = "/categories/"
+    title = ""
+
 [params]
-  # {{< version 0.2.0 changed >}} LoveIt theme version
-  version = "0.2.X"
-  # site description
-  description = "This is My New Hugo Site"
-  # site keywords
-  keywords = ["Theme", "Hugo"]
-  # site default theme ("light", "dark", "auto")
+  # site default theme ["auto", "light", "dark"]
   defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
   gitRepo = ""
   # {{< version 0.1.1 >}} which hash function used for SRI, when empty, no SRI is used
-  # ("sha256", "sha384", "sha512", "md5")
+  # ["sha256", "sha384", "sha512", "md5"]
   fingerprint = ""
   # {{< version 0.2.0 >}} date format
   dateFormat = "2006-01-02"
+  # website title for Open Graph and Twitter Cards
+  title = "My cool site"
+  # website description for RSS, SEO, Open Graph and Twitter Cards
+  description = "This is my cool site"
   # website images for Open Graph and Twitter Cards
   images = ["/logo.png"]
 
-  # {{< version 0.2.0 >}} App icon config
-  [params.app]
-    # optional site title override for the app when added to an iOS home screen or Android launcher
-    title = "LoveIt"
-    # whether to omit favicon resource links
-    noFavicon = false
-    # modern SVG favicon to use in place of older style .png and .ico files
-    svgFavicon = ""
-    # Android browser theme color
-    themeColor = "#ffffff"
-    # Safari mask icon color
-    iconColor = "#5bbad5"
-    # Windows v8-10 tile color
-    tileColor = "#da532c"
-
-  # {{< version 0.2.0 >}} Search config
-  [params.search]
-    enable = true
-    # type of search engine ("lunr", "algolia")
-    type = "lunr"
-    # max index length of the chunked content
-    contentLength = 4000
-    # placeholder of the search bar
-    placeholder = ""
-    # {{< version 0.2.1 >}} max number of results length
-    maxResultLength = 10
-    # {{< version 0.2.3 >}} snippet length of the result
-    snippetLength = 30
-    # {{< version 0.2.1 >}} HTML tag name of the highlight part in results
-    highlightTag = "em"
-    # {{< version 0.2.4 >}} whether to use the absolute URL based on the baseURL in search index
-    absoluteURL = false
-    [params.search.algolia]
-      index = ""
-      appID = ""
-      searchKey = ""
-
   # Header config
   [params.header]
-    # desktop header mode ("fixed", "normal", "auto")
+    # desktop header mode ["fixed", "normal", "auto"]
     desktopMode = "fixed"
-    # mobile header mode ("fixed", "normal", "auto")
+    # mobile header mode ["fixed", "normal", "auto"]
     mobileMode = "auto"
     # {{< version 0.2.0 >}} Header title config
     [params.header.title]
@@ -303,6 +340,43 @@ Please open the code block below to view the complete sample configuration :(far
     # amount of RSS pages
     rss = 10
 
+  # {{< version 0.2.0 >}} App icon config
+  [params.app]
+    # optional site title override for the app when added to an iOS home screen or Android launcher
+    title = "My cool site"
+    # whether to omit favicon resource links
+    noFavicon = false
+    # modern SVG favicon to use in place of older style .png and .ico files
+    svgFavicon = ""
+    # Android browser theme color
+    themeColor = "#ffffff"
+    # Safari mask icon color
+    iconColor = "#5bbad5"
+    # Windows v8-10 tile color
+    tileColor = "#da532c"
+
+  # {{< version 0.2.0 >}} Search config
+  [params.search]
+    enable = true
+    # type of search engine ["lunr", "algolia"]
+    type = "lunr"
+    # max index length of the chunked content
+    contentLength = 4000
+    # placeholder of the search bar
+    placeholder = ""
+    # {{< version 0.2.1 >}} max number of results length
+    maxResultLength = 10
+    # {{< version 0.2.3 >}} snippet length of the result
+    snippetLength = 30
+    # {{< version 0.2.1 >}} HTML tag name of the highlight part in results
+    highlightTag = "em"
+    # {{< version 0.2.4 >}} whether to use the absolute URL based on the baseURL in search index
+    absoluteURL = false
+    [params.search.algolia]
+      index = ""
+      appID = ""
+      searchKey = ""
+
   # Home page config
   [params.home]
     # {{< version 0.2.0 >}} amount of RSS pages
@@ -316,7 +390,7 @@ Please open the code block below to view the complete sample configuration :(far
       avatarURL = "/images/avatar.png"
       # {{< version 0.2.7 changed >}} title shown in home page (HTML format is supported)
       title = ""
-      # subtitle shown in home page
+      # subtitle shown in home page (HTML format is supported)
       subtitle = "This is My New Hugo Site"
       # whether to use typeit animation for subtitle
       typeit = true
@@ -397,10 +471,21 @@ Please open the code block below to view the complete sample configuration :(far
     XMPP = ""
     Matrix = ""
     Bilibili = ""
+    Discord = ""
+    DiscordInvite = ""
+    Lichess = ""
+    ORCID = ""
+    Pleroma = ""
+    Kaggle = ""
+    MediaWiki= ""
+    Plume = ""
+    HackTheBox = ""
+    RootMe= ""
+    Phone = ""
     Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
 
-  # {{< version 0.2.0 changed >}} Page config
+  # {{< version 0.2.0 changed >}} Page global config
   [params.page]
     # {{< version 0.2.0 >}} whether to hide a page from home page
     hiddenFromHomePage = false
@@ -424,17 +509,19 @@ Please open the code block below to view the complete sample configuration :(far
     [params.page.toc]
       # whether to enable the table of the contents
       enable = true
-      # whether to make the table of the contents automatically collapsed
+      # {{< version 0.2.9 >}} whether to keep the static table of the contents in front of the post
+      keepStatic = true
+      # whether to make the table of the contents in the sidebar automatically collapsed
       auto = true
     # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} mathematical formulas
     [params.page.math]
       enable = true
-      # default block delimiter is $$ ... $$ and \\[ ... \\]
-      blockLeftDelimiter = ""
-      blockRightDelimiter = ""
-      # default inline delimiter is $ ... $ and \\( ... \\)
+      # {{< version 0.2.11 changed >}} default inline delimiter is $ ... $ and \( ... \)
       inlineLeftDelimiter = ""
       inlineRightDelimiter = ""
+      # {{< version 0.2.11 changed >}} default block delimiter is $$ ... $$, \[ ... \], \begin{equation} ... \end{equation} and some other functions
+      blockLeftDelimiter = ""
+      blockRightDelimiter = ""
       # KaTeX extension copy_tex
       copyTex = true
       # KaTeX extension mhchem
@@ -444,15 +531,15 @@ Please open the code block below to view the complete sample configuration :(far
       # whether to show the copy button of the code block
       copy = true
       # the maximum number of lines of displayed code by default
-      maxShownLines = 10
+      maxShownLines = 50
     # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config
     [params.page.mapbox]
       # access token of Mapbox GL JS
       accessToken = ""
       # style for the light theme
-      lightStyle = "mapbox://styles/mapbox/light-v9"
+      lightStyle = "mapbox://styles/mapbox/light-v10?optimize=true"
       # style for the dark theme
-      darkStyle = "mapbox://styles/mapbox/dark-v9"
+      darkStyle = "mapbox://styles/mapbox/dark-v10?optimize=true"
       # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#navigationcontrol" NavigationControl >}}
       navigation = true
       # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#geolocatecontrol" GeolocateControl >}}
@@ -467,10 +554,10 @@ Please open the code block below to view the complete sample configuration :(far
       Twitter = true
       Facebook = true
       Linkedin = false
-      Whatsapp = true
+      Whatsapp = false
       Pinterest = false
       Tumblr = false
-      HackerNews = false
+      HackerNews = true
       Reddit = false
       VK = false
       Buffer = false
@@ -478,22 +565,18 @@ Please open the code block below to view the complete sample configuration :(far
       Line = true
       Instapaper = false
       Pocket = false
-      Digg = false
-      Stumbleupon = false
       Flipboard = false
       Weibo = true
-      Renren = false
-      Myspace = true
-      Blogger = true
+      Blogger = false
       Baidu = false
       Odnoklassniki = false
-      Evernote = true
+      Evernote = false
       Skype = false
       Trello = false
       Mix = false
     # {{< version 0.2.0 changed >}} Comment config
     [params.page.comment]
-      enable = true
+      enable = false
       # {{< link "https://disqus.com/" Disqus >}} comment config
       [params.page.comment.disqus]
         # {{< version 0.1.1 >}}
@@ -517,6 +600,7 @@ Please open the code block below to view the complete sample configuration :(far
         avatar = "mp"
         meta= ""
         pageSize = 10
+        # automatically adapt the current theme i18n configuration when empty
         lang = ""
         visitor = true
         recordIP = true
@@ -524,10 +608,10 @@ Please open the code block below to view the complete sample configuration :(far
         enableQQ = false
         serverURLs = ""
         # {{< version 0.2.6 >}} emoji data file name, default is "google.yml"
-        # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
-        # located in "themes/LoveIt/assets/data/emoji/" directory
+        # ["apple.yml", "google.yml", "facebook.yml", "twitter.yml"]
+        # located in "themes/LoveIt/assets/lib/valine/emoji/" directory
         # you can store your own data files in the same path under your project:
-        # "assets/data/emoji/"
+        # "assets/lib/valine/emoji/"
         emoji = ""
       # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook comment" >}} config
       [params.page.comment.facebook]
@@ -535,6 +619,7 @@ Please open the code block below to view the complete sample configuration :(far
         width = "100%"
         numPosts = 10
         appId = ""
+        # automatically adapt the current theme i18n configuration when empty
         languageCode = ""
       # {{< version 0.2.0 >}} {{< link "https://comments.app/" "Telegram comments" >}} config
       [params.page.comment.telegram]
@@ -549,7 +634,7 @@ Please open the code block below to view the complete sample configuration :(far
       # {{< version 0.2.0 >}} {{< link "https://commento.io/" "Commento" >}} comment config
       [params.page.comment.commento]
         enable = false
-      # {{< version 0.2.5 >}} {{< link "https://utteranc.es/" "Utterances" >}} comment config
+      # {{< version 0.2.5 >}} {{< link "https://utteranc.es/" "utterances" >}} comment config
       [params.page.comment.utterances]
         enable = false
         # owner/repo
@@ -558,6 +643,23 @@ Please open the code block below to view the complete sample configuration :(far
         label = ""
         lightTheme = "github-light"
         darkTheme = "github-dark"
+      # giscus comment config (https://giscus.app/)
+      [params.page.comment.giscus]
+        # You can refer to the official documentation of giscus to use the following configuration.
+        enable = false
+        repo = ""
+        repoId = ""
+        category = "Announcements"
+        categoryId = ""
+        # automatically adapt the current theme i18n configuration when empty
+        lang = ""
+        mapping = "pathname"
+        reactionsEnabled = "1"
+        emitMetadata = "0"
+        inputPosition = "bottom"
+        lazyLoading = false
+        lightTheme = "light"
+        darkTheme = "dark"
     # {{< version 0.2.7 >}} Third-party library config
     [params.page.library]
       [params.page.library.css]
@@ -570,25 +672,14 @@ Please open the code block below to view the complete sample configuration :(far
         # located in "assets/"
         # Or
         # someJavascript = "https://cdn.example.com/some.js"
-    # {{< version 0.2.0 >}} SEO config
+    # {{< version 0.2.10 changed >}} Page SEO config
     [params.page.seo]
+      # image URL
+      images = []
       # Publisher info
       [params.page.seo.publisher]
-        name = "xxxx"
-        [params.page.seo.publisher.logo]
-          url = "logo.png"
-          width = 127
-          height = 40
-      # Logo info
-      [params.page.seo.logo]
-        url = "logo.png"
-        width = 127
-        height = 40
-      # Image info
-      [params.page.seo.image]
-        url = "cover.png"
-        width = 800
-        height = 600
+        name = ""
+        logoUrl = ""
 
   # {{< version 0.2.5 >}} TypeIt config
   [params.typeit]
@@ -609,6 +700,13 @@ Please open the code block below to view the complete sample configuration :(far
     pinterest = ""
     baidu = ""
 
+  # {{< version 0.2.10 >}} Site SEO config
+  [params.seo]
+    # image URL
+    image = ""
+    # thumbnail URL
+    thumbnailUrl = ""
+
   # {{< version 0.2.0 >}} Analytics config
   [params.analytics]
     enable = false
@@ -622,6 +720,12 @@ Please open the code block below to view the complete sample configuration :(far
       id = ""
       # server url for your tracker if you're self hosting
       server = ""
+    # Plausible Analytics
+    [params.analytics.plausible]
+      dataDomain = ""
+    # Yandex Metrica
+    [params.analytics.yandexMetrica]
+      id = ""
 
   # {{< version 0.2.7 >}} Cookie consent config
   [params.cookieconsent]
@@ -635,7 +739,7 @@ Please open the code block below to view the complete sample configuration :(far
   # {{< version 0.2.7 changed >}} CDN config for third-party library files
   [params.cdn]
     # CDN data file name, disabled by default
-    # ("jsdelivr.yml")
+    # ["jsdelivr.yml"]
     # located in "themes/LoveIt/assets/data/cdn/" directory
     # you can store your own data files in the same path under your project:
     # "assets/data/cdn/"
@@ -676,12 +780,6 @@ Please open the code block below to view the complete sample configuration :(far
   [markup.tableOfContents]
     startLevel = 2
     endLevel = 6
-
-# Author config
-[author]
-  name = "xxxx"
-  email = ""
-  link = ""
 
 # Sitemap config
 [sitemap]
@@ -744,7 +842,7 @@ You could enable these features with `hugo serve -e production`.
 ```toml
 [params.cdn]
   # CDN data file name, disabled by default
-  # ("jsdelivr.yml")
+  # ["jsdelivr.yml"]
   data = ""
 ````
 
@@ -783,7 +881,7 @@ The default data of all supported social links is located in `themes/LoveIt/asse
 which is you can refer to.
 {{< /admonition >}}
 
-![Complete configuration preview](/images/theme-documentation-basics/complete-configuration-preview.png "Complete configuration preview")
+![Complete configuration preview](complete-configuration-preview.png "Complete configuration preview")
 
 ### 3.2 Favicons, Browserconfig, Manifest
 
@@ -800,11 +898,7 @@ into `/static`. They’re easily created via [https://realfavicongenerator.net/]
 
 Customize `browserconfig.xml` and `site.webmanifest` to set theme-color and background-color.
 
-### 3.3 Add Logo and Cover for SEO
-
-Add a logo image (127x40) and a cover image (800x600) in the `static` directory.
-
-### 3.4 Style Customization
+### 3.3 Style Customization
 
 {{< version 0.2.8 changed >}}
 
@@ -831,16 +925,17 @@ In `assets/css/_custom.scss`, you can add some css style code to customize the s
 
 **LoveIt** theme is fully compatible with Hugo multilingual mode, which provides in-browser language switching.
 
-![Language Switch](/images/theme-documentation-basics/language-switch.gif "Language Switch")
+![Language Switch](language-switch.gif "Language Switch")
 
 ### 4.1 Compatibility {#language-compatibility}
 
-{{< version 0.2.7 changed >}}
+{{< version 0.2.10 changed >}}
 
 | Language             | Hugo Code | HTML `lang` Attribute | Theme Docs                    | Lunr.js Support               |
 |:-------------------- |:---------:|:---------------------:|:-----------------------------:|:-----------------------------:|
 | English              | `en`      | `en`                  | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
 | Simplified Chinese   | `zh-cn`   | `zh-CN`               | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
+| Traditional Chinese  | `zh-tw`   | `zh-TW`               | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | French               | `fr`      | `fr`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Polish               | `pl`      | `pl`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
 | Brazilian Portuguese | `pt-br`   | `pt-BR`               | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
@@ -851,6 +946,15 @@ In `assets/css/_custom.scss`, you can add some css style code to customize the s
 | Serbian              | `sr`      | `sr`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
 | Russian              | `ru`      | `ru`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Romanian             | `ro`      | `ro`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
+| Vietnamese           | `vi`      | `vi`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
+| Arabic               | `ar`      | `ar`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
+| Catalan              | `ca`      | `ca`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
+| Thai                 | `th`      | `th`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
+| Telugu               | `te`      | `te`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
+| Indonesian           | `id`      | `id`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
+| Turkish              | `tr`      | `tr`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
+| Korean               | `ko`      | `ko`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
+| Hindi                | `hi`      | `hi`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
 
 ### 4.2 Basic Configuration
 
@@ -859,7 +963,7 @@ After learning [how Hugo handle multilingual websites](https://gohugo.io/content
 For example with English, Chinese and French website:
 
 ```toml
-# [en, zh-cn, fr, pl, ...] determines default content language
+# determines default content language ["en", "zh-cn", "fr", "pl", ...]
 defaultContentLanguage = "en"
 
 [languages]
@@ -869,62 +973,60 @@ defaultContentLanguage = "en"
     languageCode = "en"
     languageName = "English"
     [[languages.en.menu.main]]
+      weight = 1
       identifier = "posts"
       pre = ""
       post = ""
       name = "Posts"
       url = "/posts/"
       title = ""
-      weight = 1
     [[languages.en.menu.main]]
+      weight = 2
       identifier = "tags"
       pre = ""
       post = ""
       name = "Tags"
       url = "/tags/"
       title = ""
-      weight = 2
     [[languages.en.menu.main]]
+      weight = 3
       identifier = "categories"
       pre = ""
       post = ""
       name = "Categories"
       url = "/categories/"
       title = ""
-      weight = 3
 
   [languages.zh-cn]
     weight = 2
     title = "我的全新 Hugo 网站"
-    # language code, CN only here
     languageCode = "zh-CN"
     languageName = "简体中文"
-    # whether to include Chinese/Japanese/Korean
     hasCJKLanguage = true
     [[languages.zh-cn.menu.main]]
+      weight = 1
       identifier = "posts"
       pre = ""
       post = ""
       name = "文章"
       url = "/posts/"
       title = ""
-      weight = 1
     [[languages.zh-cn.menu.main]]
+      weight = 2
       identifier = "tags"
       pre = ""
       post = ""
       name = "标签"
       url = "/tags/"
       title = ""
-      weight = 2
     [[languages.zh-cn.menu.main]]
+      weight = 3
       identifier = "categories"
       pre = ""
       post = ""
       name = "分类"
       url = "/categories/"
       title = ""
-      weight = 3
 
   [languages.fr]
     weight = 3
@@ -932,29 +1034,29 @@ defaultContentLanguage = "en"
     languageCode = "fr"
     languageName = "Français"
     [[languages.fr.menu.main]]
+      weight = 1
       identifier = "posts"
       pre = ""
       post = ""
       name = "Postes"
       url = "/posts/"
       title = ""
-      weight = 1
     [[languages.fr.menu.main]]
+      weight = 2
       identifier = "tags"
       pre = ""
       post = ""
       name = "Balises"
       url = "/tags/"
       title = ""
-      weight = 2
     [[languages.fr.menu.main]]
+      weight = 3
       identifier = "categories"
       name = "Catégories"
       pre = ""
       post = ""
       url = "/categories/"
       title = ""
-      weight = 3
 ```
 
 Then, for each new page, append the language code to the file name.
@@ -1005,7 +1107,7 @@ Here is the search configuration in your [site configuration](#site-configuratio
 ```toml
 [params.search]
   enable = true
-  # type of search engine ("lunr", "algolia")
+  # type of search engine ["lunr", "algolia"]
   type = "lunr"
   # max index length of the chunked content
   contentLength = 4000
@@ -1039,7 +1141,7 @@ The following is a comparison of two search engines:
 {{< admonition tip "Tips about algolia" >}}
 You need to upload `index.json` files to algolia to activate searching.
 You could upload the `index.json` files by browsers but a CLI tool may be better.
-[Algolia Atomic](https://github.com/chrisdmacrae/atomic-algolia) is a good choice.
+The official [Algolia CLI](https://github.com/algolia/algolia-cli) is a good choice.
 To be compatible with Hugo multilingual mode,
 you need to upload different `index.json` for each language to the different index of algolia, such as `zh-cn/index.json` or `fr/index.json`...
 {{< /admonition >}}

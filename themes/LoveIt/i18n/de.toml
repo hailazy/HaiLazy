@@ -4,7 +4,7 @@
 
 # === baseof ==
 [backToTop]
-other = "nach oben"
+other = "Nach oben"
 
 [viewComments]
 other = "Kommentare anzeigen"
@@ -17,7 +17,7 @@ other = "Artikel"
 
 # === Taxonomy ===
 [allSome]
-other = "Alle %s"
+other = "Alle {{ .Some }}"
 
 [tag]
 other = "Tag"
@@ -42,15 +42,12 @@ other = "Mehr"
 other = "Sprache wählen"
 
 [switchTheme]
-other = "Thema wechseln"
+other = "Darstellung ändern"
 # === partials/header.html ===
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Ermöglicht durch %s"
-
-[theme]
-other = "Thema"
+other = "Realisiert durch {{ .Hugo }} | Thema - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
@@ -62,6 +59,9 @@ other = "Ihr Kommentar ..."
 
 [facebookLanguageCode]
 other = "de_DE"
+
+[giscusLang]
+other = "de"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
@@ -108,11 +108,11 @@ other = "Teilen auf"
 [contents]
 other = "Inhalt"
 
-[publish]
-other = "veröffentlicht auf"
+[publishedOnDate]
+other = "veröffentlicht an {{ .Date }}"
 
-[included]
-other = "enthalten in"
+[includedInCategories]
+other = "enthalten in {{ .Categories }}"
 
 [wordCount]
 one = "Ein Wort"
@@ -128,13 +128,10 @@ other = "Aufrufe"
 [author]
 other = "Autor"
 
-[lastMod]
-other = "Aktualisiert am %s"
+[updatedOnDate]
+other = "Aktualisiert am {{ .Date }}"
 
-[license]
-other = "Veröffentlicht unter der %s Lizenz"
-
-[seeMarkdown]
+[readMarkdown]
 other = "Markdown anzeigen"
 
 [back]
@@ -160,13 +157,13 @@ other = "Leider konnte die von Ihnen angeforderte Seite nicht aufgerufen werden.
 other = "Notiz"
 
 [abstract]
-other = "Ausblick"
+other = "Kurzfassung"
 
 [info]
 other = "Info"
 
 [tip]
-other = "Tip"
+other = "Tipp"
 
 [success]
 other = "Erfolg"
@@ -181,7 +178,7 @@ other = "Warnung"
 other = "Fehler"
 
 [danger]
-other = "Gefahr"
+other = "Vorsicht"
 
 [bug]
 other = "Bug"

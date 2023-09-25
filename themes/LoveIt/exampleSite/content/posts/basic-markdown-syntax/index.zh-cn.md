@@ -7,11 +7,13 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "这篇文章展示了基本的 Markdown 语法和格式."
-images: ["/images/basic-markdown-syntax/featured-image.png"]
+images: []
+resources:
+- name: "featured-image"
+  src: "featured-image.png"
 
 tags: ["Markdown", "HTML"]
 categories: ["Markdown"]
-featuredImage: "/images/basic-markdown-syntax/featured-image.png"
 
 lightgallery: true
 ---

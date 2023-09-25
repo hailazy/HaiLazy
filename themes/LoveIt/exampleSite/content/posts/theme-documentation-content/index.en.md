@@ -7,11 +7,13 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Find out how to create and organize your content quickly and intuitively in LoveIt theme."
-images: ["/images/theme-documentation-content/featured-image.jpg"]
+images: []
+resources:
+- name: "featured-image"
+  src: "featured-image.jpg"
 
 tags: ["content", "Markdown"]
 categories: ["documentation"]
-featuredImage: "/images/theme-documentation-content/featured-image.jpg"
 
 lightgallery: true
 
@@ -25,13 +27,35 @@ Find out how to create and organize your content quickly and intuitively in **Lo
 
 <!--more-->
 
-## 1 Contents Organization
+## 1 Contents Organization {#contents-organization}
 
 A few suggestions to help you get a good looking site quickly:
 
 * Keep post pages in the `content/posts` directory, for example: `content/posts/my-first-post.md`
-* Keep static pages in the `content` directory, for example: `content/about.md`
-* Keep media like images in the `static` directory, for example: `static/images/screenshot.png`
+* Keep other pages in the `content` directory, for example: `content/about.md`
+* Local resources organization
+
+{{< admonition note "Local Resource Reference" >}}
+{{< version 0.2.10 >}}
+
+There are three ways to reference local resources such as **images** and **music**:
+
+1. Using [page resources](https://gohugo.io/content-management/page-resources/) in [page bundles](https://gohugo.io/content-management/page-bundles/).
+   You can reference page resources by the value for `Resources.GetMatch` or the filepath of the resource relative to the page directory directly.
+2. Store resources in the **assets** directory, which is `/assets` by default.
+   The filepath of the resource to reference in the post is relative to the assets directory.
+3. Store resources in the **static** directory, which is `/static` by default.
+   The filepath of the resource to reference in the post is relative to the static directory.
+
+The **priority** of references is also in the above order.
+
+There are many places in the theme where the above local resource references can be used,
+such as **links**, **images**, `image` shortcode, `music` shortcode and some params in the **front matter**.
+
+Images in page resources or assets directory [processing](https://gohugo.io/content-management/image-processing/)
+will be supported in the future.
+It's really cool! :(far fa-grin-squint fa-fw):
+{{< /admonition >}}
 
 ## 2 Front Matter {#front-matter}
 
@@ -59,6 +83,7 @@ images: []
 
 tags: []
 categories: []
+
 featuredImage: ""
 featuredImagePreview: ""
 
@@ -77,12 +102,11 @@ toc:
   auto: true
 code:
   copy: true
-  # ...
+  maxShownLines: 50
 math:
-  enable: true
+  enable: false
   # ...
 mapbox:
-  accessToken: ""
   # ...
 share:
   enable: true
@@ -101,6 +125,9 @@ library:
     # located in "assets/"
     # Or
     # someJS = "https://cdn.example.com/some.js"
+seo:
+  images: []
+  # ...
 ---
 ```
 
@@ -117,6 +144,7 @@ library:
 
 * **tags**: the tags for the content.
 * **categories**: the categories for the content.
+
 * **featuredImage**: the featured image for the content.
 * **featuredImagePreview**: the featured image for the content preview in the home page.
 
@@ -130,19 +158,37 @@ library:
 * **linkToMarkdown**: if `true`, the footer of the content will be shown the link to the orignal Markdown file.
 * **rssFullText**: {{< version 0.2.4 >}} if `true`, the full text content will be shown in RSS.
 
-* **toc**: {{< version 0.2.0 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **toc**: {{< version 0.2.9 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **code**: {{< version 0.2.0 >}} the same as the `params.page.code` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **math**: {{< version 0.2.0 changed >}} the same as the `params.page.math` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **mapbox**: {{< version 0.2.0 >}} the same as the `params.page.mapbox` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **share**: the same as the `params.page.share` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **comment**: {{< version 0.2.0 changed >}} the same as the `params.page.comment` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **library**: {{< version 0.2.7 >}} the same as the `params.page.library` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **seo**: {{< version 0.2.10 >}} the same as the `params.page.seo` part in the [site configuration](../theme-documentation-basics#site-configuration).
+
+{{< admonition tip >}}
+{{< version 0.2.10 >}}
+
+**featuredImage** and **featuredImagePreview** support the complete usage of [local resource references](#contents-organization).
+
+If the page resource with `name: featured-image` or `name: featured-image-preview` is set in the front matter,
+it is not necessary to set the parameter `featuredImage` or `featuredImagePreview`:
+
+```yaml
+resources:
+- name: featured-image
+  src: featured-image.jpg
+- name: featured-image-preview
+  src: featured-image-preview.jpg
+```
+{{< /admonition >}}
 
 ## 3 Content Summaries
 
 **LoveIt** theme uses the summary of the content to display abstract information in the home page. Hugo can generate summaries of your content.
 
-![Summary Preview](/images/theme-documentation-content/summary.png "Summary Preview")
+![Summary Preview](summary.png "Summary Preview")
 
 ### Automatic Summary Splitting
 
@@ -199,60 +245,177 @@ This part is shown in the [emoji support page](../emoji-support/).
 
 ### Mathematical Formula
 
-**LoveIt** theme supports mathematical formulas based on [$ \KaTeX $](https://katex.org/).
+{{< version 0.2.11 changed >}}
+
+**LoveIt** theme supports mathematical formulas based on [$\KaTeX$](https://katex.org/).
 
 Set the property `enable = true` under `[params.math]` in your [site configuration](../theme-documentation-basics#site-configuration)
 and the property `math: true` of the article front matter to enable the automatic rendering of mathematical formulas.
+**$\KaTeX$** automatically renders formulas based on **specific delimiters**.
 
 {{< admonition tip >}}
-Here is a list of [$ \TeX $ functions supported by $ \KaTeX $](https://katex.org/docs/supported.html).
+Here is a list of [$\TeX$ functions supported by $\KaTeX$](https://katex.org/docs/supported.html).
 {{< /admonition >}}
 
-#### Block Formula
+{{< admonition >}}
+Since Hugo generates HTML documents according to the syntax such as `_`/`*`/`>>` when rendering Markdown documents,
+and some text content in the form of escape characters
+(such as `\(`/`\)`/`\[`/`\]`/`\\`) escape processing will be performed automatically,
+therefore, additional escape character expressions are required for these places to achieve automatic rendering:
 
-The default block delimiters are `$$`/`$$` and `\\[`/`\\]`:
+* `_` -> `\_`
+* `*` -> `\*`
+* `>>` -> `\>>`
+* `\(` -> `\\(`
+* `\)` -> `\\)`
+* `\[` -> `\\[`
+* `\]` -> `\\]`
+* `\\` -> `\\\\`
+
+**LoveIt** theme supports [`raw` shortcode](../theme-documentation-extended-shortcodes#12-raw) to avoid these escape characters,
+which helps you write raw mathematical formula content.
+
+Example `raw` input:
 
 ```markdown
-$$ c = \pm\sqrt{a^2 + b^2} $$
+Inline Formula: {{</* raw */>}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){{</* /raw */>}}
 
-\\[ f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\]
+Block Formula:
+
+{{</* raw */>}}
+\[ a=b+c \\ d+e=f \]
+{{</* /raw */>}}
 ```
 
 The rendered output looks like this:
 
-$$ c = \pm\sqrt{a^2 + b^2} $$
+Inline Formula: {{< raw >}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){{< /raw >}}
 
-\\[ f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\]
+Block Formula:
+
+{{< raw>}}
+\[ a=b+c \\ d+e=f \]
+{{< /raw >}}
+{{< /admonition >}}
 
 #### Inline Formula
 
-The default inline delimiters are `$`/`$` and `\\(`/`\\)`:
+The default inline delimiters are:
 
-```markdown
-$ c = \pm\sqrt{a^2 + b^2} $ and \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\)
+* `$ ... $`
+* `\( ... \)` (escaped: `\\( ... \\)`)
+
+For example:
+
+```tex
+$c = \pm\sqrt{a^2 + b^2}$ and \\(f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi\\)
 ```
 
 The rendered output looks like this:
 
-$ c = \pm\sqrt{a^2 + b^2} $ and \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\)
+$c = \pm\sqrt{a^2 + b^2}$ and \\(f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi\\)
+
+#### Block Formula
+
+The default block delimiters are:
+
+* `$$ ... $$`
+* `\[ ... \]` (escaped: `\\[ ... \\]`)
+* `\begin{equation} ... \end{equation}` (unnumbered: `\begin{equation*} ... \end{equation*}`)
+* `\begin{align} ... \end{align}` (unnumbered: `\begin{align*} ... \end{align*}`)
+* `\begin{alignat} ... \end{alignat}` (unnumbered: `\begin{alignat*} ... \end{alignat*}`)
+* `\begin{gather} ... \end{gather}` (unnumbered: `\begin{gather*} ... \end{gather*}`)
+* `\begin{CD} ... \end{CD}`
+
+For example:
+
+```tex
+$$ c = \pm\sqrt{a^2 + b^2} $$
+
+\\[ f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\]
+
+\begin{equation*}
+  \rho \frac{\mathrm{D} \mathbf{v}}{\mathrm{D} t}=\nabla \cdot \mathbb{P}+\rho \mathbf{f}
+\end{equation*}
+
+\begin{equation}
+  \mathbf{E}=\sum_{i} \mathbf{E}\_{i}=\mathbf{E}\_{1}+\mathbf{E}\_{2}+\mathbf{E}_{3}+\cdots
+\end{equation}
+
+\begin{align}
+  a&=b+c \\\\
+  d+e&=f
+\end{align}
+
+\begin{alignat}{2}
+   10&x+&3&y = 2 \\\\
+   3&x+&13&y = 4
+\end{alignat}
+
+\begin{gather}
+   a=b \\\\
+   e=b+c
+\end{gather}
+
+\begin{CD}
+   A @>a\>> B \\\\
+@VbVV @AAcA \\\\
+   C @= D
+\end{CD}
+```
+
+The rendered output looks like this:
+
+$$ c = \pm\sqrt{a^2 + b^2} $$
+
+\\[ f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\]
+
+\begin{equation*}
+  \rho \frac{\mathrm{D} \mathbf{v}}{\mathrm{D} t}=\nabla \cdot \mathbb{P}+\rho \mathbf{f}
+\end{equation*}
+
+\begin{equation}
+  \mathbf{E}=\sum_{i} \mathbf{E}\_{i}=\mathbf{E}\_{1}+\mathbf{E}\_{2}+\mathbf{E}_{3}+\cdots
+\end{equation}
+
+\begin{align}
+  a&=b+c \\\\
+  d+e&=f
+\end{align}
+
+\begin{alignat}{2}
+   10&x+&3&y = 2 \\\\
+   3&x+&13&y = 4
+\end{alignat}
+
+\begin{gather}
+   a=b \\\\
+   e=b+c
+\end{gather}
+
+\begin{CD}
+   A @>a\>> B \\\\
+@VbVV @AAcA \\\\
+   C @= D
+\end{CD}
 
 {{< admonition tip >}}
-You can add more block and inline delimiters in your [site configuration](../theme-documentation-basics#site-configuration).
+You can add more inline and block delimiters in your [site configuration](../theme-documentation-basics#site-configuration).
 {{< /admonition >}}
 
 #### Copy-tex
 
-**[Copy-tex](https://github.com/Khan/KaTeX/tree/master/contrib/copy-tex)** is an extension for **$ \KaTeX $**.
+**[Copy-tex](https://github.com/Khan/KaTeX/tree/master/contrib/copy-tex)** is an extension for **$\KaTeX$**.
 
-By the extension, when selecting and copying $ \KaTeX $ rendered elements, copies their $ \LaTeX $ source to the clipboard.
+By the extension, when selecting and copying $\KaTeX$ rendered elements, copies their $\LaTeX$ source to the clipboard.
 
 Set the property `copyTex = true` under `[params.math]` in your [site configuration](../theme-documentation-basics#site-configuration) to enable Copy-tex.
 
-Select and copy the formula rendered in the previous section, and you can find that the copied content is the LaTeX source code.
+Select and copy the formula rendered in the previous section, and you can find that the copied content is the $\LaTeX$ source code.
 
 #### mhchem
 
-**[mhchem](https://github.com/Khan/KaTeX/tree/master/contrib/mhchem)** is an extension for **$ \KaTeX $**.
+**[mhchem](https://github.com/Khan/KaTeX/tree/master/contrib/mhchem)** is an extension for **$\KaTeX$**.
 
 By the extension, you can write beautiful chemical equations easily in the article.
 

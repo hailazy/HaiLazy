@@ -7,11 +7,13 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Hugo provides multiple built-in shortcodes for author convenience and to keep your markdown content clean."
-images: ["/images/theme-documentation-built-in-shortcodes/featured-image.png"]
+images: []
+resources:
+- name: "featured-image"
+  src: "featured-image.png"
 
 tags: ["shortcodes"]
 categories: ["documentation"]
-featuredImage: "/images/theme-documentation-built-in-shortcodes/featured-image.png"
 
 lightgallery: true
 ---
@@ -36,18 +38,18 @@ Hugo ships with a set of predefined shortcodes that represent very common usage.
 Example `figure` input:
 
 ```markdown
-{{</* figure src="/images/theme-documentation-built-in-shortcodes/lighthouse.jpg" title="Lighthouse (figure)" */>}}
+{{</* figure src="/images/lighthouse.jpg" title="Lighthouse (figure)" */>}}
 ```
 
 The rendered output looks like this:
 
-{{< figure src="/images/theme-documentation-built-in-shortcodes/lighthouse.jpg" title="Lighthouse (figure)" >}}
+{{< figure src="/images/lighthouse.jpg" title="Lighthouse (figure)" >}}
 
 The HTML looks like this:
 
 ```html
 <figure>
-    <img src="/images/theme-documentation-built-in-shortcodes/lighthouse.jpg"/>
+    <img src="/images/lighthouse.jpg"/>
     <figcaption>
         <h4>Lighthouse (figure)</h4>
     </figcaption>
@@ -110,15 +112,11 @@ The rendered output looks like this:
 
 [Documentation of `instagram`](https://gohugo.io/content-management/shortcodes#instagram)
 
-Example `instagram` input:
-
-```markdown
-{{</* instagram BWNjjyYFxVx hidecaption */>}}
-```
-
-The rendered output looks like this:
-
-{{< instagram BWNjjyYFxVx hidecaption >}}
+{{< admonition question "Instagram’s API was deprecated since October 24th, 2020" >}}
+The instagram-shortcode refers an endpoint of Instagram’s API, that’s deprecated since October 24th, 2020.
+Thus, no images can be fetched from this API endpoint, resulting in an error when the instagram-shortcode is used.
+For more information please have a look at GitHub issue [#7879](https://github.com/gohugoio/hugo/issues/7879).
+{{< /admonition >}}
 
 ## 5 param
 
@@ -145,12 +143,12 @@ The rendered output looks like this:
 Example `tweet` input:
 
 ```markdown
-{{</* tweet 877500564405444608 */>}}
+{{</* tweet 917359331535966209 */>}}
 ```
 
 The rendered output looks like this:
 
-{{< tweet 877500564405444608 >}}
+{{< tweet 917359331535966209 >}}
 
 ## 8 vimeo
 

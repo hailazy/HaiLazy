@@ -3,7 +3,6 @@ name: Bug Report 错误报告
 about: Create a bug report 创建一个错误报告
 title: "[BUG] Some problem..."
 labels: bug
-assignees: dillonzq
 
 ---
 
@@ -24,17 +23,17 @@ If applicable, add screenshots to help explain your problem.
 
 ### Build Environment 构建环境
 
-- OS: [e.g. Windows 10, macOS, Ubuntu]
+- OS: [e.g. Windows 11, macOS, Ubuntu]
 - Theme version/commit [e.g. 0.2.0, 2ccba79]
 - Hugo version [e.g. 0.69.0]
 
-Please use Hugo **extended** version.
-请使用 Hugo **extended** 版本.
+Please try to use Hugo **extended** version before opening the issue.
+请在创建 issue 之前先尝试使用 Hugo **extended** 版本构建.
 
 ### Preview Environment 预览环境
 
-- OS: [e.g. Windows 10, macOS, Ubuntu, iOS, Android]
-- Browser [e.g. Chrome, Safari, Firefox]
+- OS: [e.g. Windows 11, macOS, Ubuntu, iOS, Android]
+- Browser type/version [e.g. Chrome 103.0.5060.53, Safari 15.5, Edge 103.0.1264.37, Firefox 102.0]
 
 ### Additional Information 补充信息
 
