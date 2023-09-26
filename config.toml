@@ -295,7 +295,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # 主页的社交信息设置
   [params.social]
     Email = "thanhha9x98@gmail.com"
-    Facebook = "BlueSea.IT"
+    Facebook = "HaiLazy.IT"
     Instagram = "hai.lazy_"
     GitHub = "haimap"
     Linkedin = "thanh-hai-nguyen-09011998"
