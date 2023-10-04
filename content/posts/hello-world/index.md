@@ -1,5 +1,4 @@
 ---
-weight: 1
 title: "Hello, world!"
 date: 2020-04-25T13:46:31+07:00
 lastmod: 2020-04-25T13:46:31+07:00
