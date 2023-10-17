@@ -256,9 +256,9 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # 是否在搜索索引中使用基于 baseURL 的绝对路径
     absoluteURL = false
     [params.search.algolia]
-      index = "hailazy_blog"
-      appID = "VKFZJCJ6KA"
-      searchKey = "3c9e0dc35210538685a578ab972b9190"
+      index = "hailazy_blog_vn"
+      appID = "B1I0MXO0TT"
+      searchKey = "21425826d5ce88c14df3a66958e89ca4"
 
   # Home page config
   # 主页信息设置
