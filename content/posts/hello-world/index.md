@@ -1,9 +1,12 @@
 ---
 title: "Hello, world!"
 date: 2020-04-25T13:46:31+07:00
-lastmod: 2020-04-25T13:46:31+07:00
+lastmod: 2023-10-17T08:46:31+07:00
 description: "Bài blog đầu tiên, xin chào thế giới"
-images: ["/images/hello-world/hello_world_cover.png"]
+images: []
+resources:
+  - name: "featured-image"
+    src: "hello-world-cover.png"
 draft: false
 
 tags: ["hello world"]
@@ -11,7 +14,6 @@ categories: ["coding"]
 hiddenFromHomePage: false
 
 toc: true
-featuredImage: "/images/hello-world/hello_world_cover.png"
 autoCollapseToc: true
 math: false
 lightgallery: true

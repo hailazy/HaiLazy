@@ -12,7 +12,7 @@ share:
   enable: true
 comment: true
 ---
-
+Hi, I'm Hai!
 
 I don't often talk about myself in public, not because [I'm an introvert](https://www.16personalities.com/profiles/ff09012cf8595) (well, maybe a little), but because I believe actions speak louder than words. However, since you've taken the time to visit, you deserve to know a bit more about me than what you'll find on my LinkedIn page or social media profiles.
 
